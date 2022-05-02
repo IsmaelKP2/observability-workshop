@@ -38,6 +38,10 @@ data('VolumeWriteOps', filter=filter('namespace', 'AWS/EBS') and filter('stat', 
 ```
 Execute this search.
 
+If everything went well, you should be presented with a list of events that looks similar to the one on the screenshot below. In case you don't see any events, please try to filter by time with the timepicker.
+
+<img src="../../images/custom_service/search_result.png" alt="Search Result" style="width: 100%;"/><br>
+
 {{% alert title="Caution" %}}
 Internal note: If I run the below search, my line chart is empty. Is this supposed to be like this?
 {{% /alert %}}
@@ -90,7 +94,7 @@ Locate the *AWS* service in the list of available services and open it by clicki
 
 Locate our custom *EBS Volume* service by using the filter, select it, and select the *ServiceHealthScore* KPI. 
 
-<img src="../../images/custom_service/ebs.png" alt="Add dependencies" style="width: 50%;"/>
+<img src="../../images/custom_service/add_dependencies.png" alt="Add dependencies" style="width: 60%;"/>
 
 Click on the **Done** button. Verify that the service got added to the list of available serives and click the **Save** button on the lower right.
 In the pop-up dialogue, click **Save and Enable**.

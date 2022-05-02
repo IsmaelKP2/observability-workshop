@@ -41,15 +41,21 @@ On the next screen, select *Add content packs* and choose *Splunk Observability 
 
 ![Add](../../images/cp_configure/add.png)
 
-Upon clicking on the *Splunk Observability Cloud*-tile, you are presented with an overview of what is included in the Content Pack. Review it, and finally click on
-
-![Proceed Button](../../images/cp_configure/proceed_button.png)
+Upon clicking on the *Splunk Observability Cloud*-tile, you are presented with an overview of what is included in the Content Pack. Review it, and finally click on the *Proceed* button.
 
 Next, you are presented with a settings menu to configure the content pack. **The following is important:** Please disable the *Import as enable*-option, leave the *Enter a prefix* input field blank, and disable the *Backfill service KPIs* option.
 
 ![Settings](../../images/cp_configure/settings.png)
 
-Finally, click on the [Install selected] button.
+Finally, click on the *Install selected* button.
+
+When prompted to "Back up your environment", click the *Install* button.
+
+<img src="../../images/cp_configure/backup.png" alt="Backup Dialogue" style="width: 45%;"/>
+
+After the installation run to completion, you are greeted by a view providing an overview over the installed components.
+
+<img src="../../images/cp_configure/installation_completed.png" alt="Installation Completed" style="width: 65%;"/>
 
 The *Splunk Observability Cloud* tile on the *Data Integrations* page should now have a little green checkmark on the upper right corner. This means that we are all set. Perfect!
 
