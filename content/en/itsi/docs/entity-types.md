@@ -27,14 +27,12 @@ Enable APM Service (4 service to enable)
 
 ### Enable Cloud Entity Search for APM  
 
-Go to Settings -> Searches, Reports, and Alerts  
+Go to *Settings* -> *Searches, Reports, and Alerts*  
 
-Select App Splunk Observability Cloud | Owner All  
-Find the line ITSI Import Objects - Splunk-APM Application Entity Search -> (Actions) Edit -> Enable  
-NOTE those searches are called Cloud Entity Searches  
-Open ITSI ->  Infrastructure Overview  
-Verify that you have your entities are showing up
-Note: there isn't any out of the box Key vital metrics so the visualisation will look like this
+* Select *App Splunk Observability Cloud | Owner All*
+* Find the line *ITSI Import Objects - Splunk-APM Application Entity Search* -> (Actions) Edit -> Enable  <br> ***NOTE:** those searches are called Cloud Entity Searches*  
+* Open *ITSI* -> *Infrastructure Overview*
+* Verify that you have your entities are showing up <br> ***Note:** there isn't any out of the box Key vital metrics so the visualisation will look like this*
 
 ![Splunk APM](../..//images/custom_service/SplunkAPM.png)
 
