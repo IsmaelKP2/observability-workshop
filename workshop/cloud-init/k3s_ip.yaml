@@ -159,6 +159,7 @@ write_files:
       unset GIT_WORK_DIR
 
 runcmd:
+  - sudo chmod +r /etc/rancher/k3s/k3s.yaml
   # Install Helm
   - curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   # Install K9s (Kubernetes UI)
@@ -199,8 +200,8 @@ runcmd:
   - sed -i "s/\"--no-beep\"/\"--no-beep --disable-ssl\"/" /etc/default/shellinabox
   - sudo service shellinabox restart
   # Git Clone the QEP repo 
-  - git clone https://github.com/billg-splunk/qep.git
-  # navigate to QEP folder 
+  - git clone https://github.com/IsmaelKP2/qep.git
+    # navigate to QEP folder 
   - cd qep
   # (1) Build the credit-check-service app
   - docker build -t credit-check-service:latest creditcheckservice
@@ -210,7 +211,9 @@ runcmd:
   - sudo k3s ctr images import credit-check-service.tar
   # (4) Deploy the service in kubernetes
   - kubectl apply -f creditcheckservice/creditcheckservice.yaml
-  
+  # (5) Deploy the creditprocessorservice in kubernetes
+  - kubectl apply -f creditprocessorservice/creditprocessorservice.yaml
+
   # Install AWS CLI
   #- curl -s https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
   #- unzip -qq awscliv2.zip
