@@ -176,8 +176,9 @@ runcmd:
   #- rm -rf /home/ubuntu/observability-workshop-$WSVERSION
   - git clone https://github.com/IsmaelKP2/observability-workshop.git
   - mkdir /home/ubuntu/workshop
+  - chown -R ubuntu:ubuntu /observability-workshop/
   - sudo mv /observability-workshop/workshop/* /home/ubuntu/workshop
-  - chown ubuntu:ubuntu /observability-workshop
+  - chown -R ubuntu:ubuntu /home/ubuntu/workshop
   # Set apm-config.sh executable
   - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
   # Download Splunk Observability Cloud Jumpstart
