@@ -74,6 +74,8 @@ write_files:
       export PRESETUP="Yes"   
       export REALM=us1
       export ACCESS_TOKEN=U3EJ9YqiOOH7VKApYY9Rwg
+      export KUBECONFIG=/home/ubuntu/.kube/config
+
       if [ "$PRESETUP" == "Yes" ]; then
         echo " Pre-installation of the otel collector . "
         helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart 
@@ -159,20 +161,25 @@ write_files:
       unset GIT_WORK_DIR
 
 runcmd:
-  - sudo chmod +r /etc/rancher/k3s/k3s.yaml
   # Install Helm
   - curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   # Install K9s (Kubernetes UI)
   - curl -S -OL https://github.com/derailed/k9s/releases/download/v0.26.3/k9s_Linux_x86_64.tar.gz
   - tar xfz k9s_Linux_x86_64.tar.gz -C /usr/local/bin/ k9s
-  # Download Workshop
-  - export WSVERSION=4.36
-  - 'export WSARCHIVE=$([ "$WSVERSION" = "main" ] && echo "main" || echo "v$WSVERSION")'
-  - curl -s -OL https://github.com/splunk/observability-workshop/archive/$WSARCHIVE.zip
-  - unzip -qq $WSARCHIVE.zip -d /home/ubuntu/
+  # # Download Workshop
+  # - export WSVERSION=4.36
+  # - 'export WSARCHIVE=$([ "$WSVERSION" = "main" ] && echo "main" || echo "v$WSVERSION")'
+  # - curl -s -OL https://github.com/splunk/observability-workshop/archive/$WSARCHIVE.zip
+  # - unzip -qq $WSARCHIVE.zip -d /home/ubuntu/
+  # - mkdir /home/ubuntu/workshop
+  # - mv /home/ubuntu/observability-workshop-$WSVERSION/workshop/* /home/ubuntu/workshop
+  # - rm -rf /home/ubuntu/observability-workshop-$WSVERSION
+  # Git Clone the my version of the workshop
+  - git clone https://github.com/IsmaelKP2/observability-workshop.git /home/ubuntu
+  - chown ubuntu:ubuntu /home/ubuntu/observability-workshop
   - mkdir /home/ubuntu/workshop
-  - mv /home/ubuntu/observability-workshop-$WSVERSION/workshop/* /home/ubuntu/workshop
-  - rm -rf /home/ubuntu/observability-workshop-$WSVERSION
+  - mv /home/ubuntu/observability-workshop/workshop/* /home/ubuntu/workshop
+  - rm -rf /home/ubuntu/observability-workshop
   # Set apm-config.sh executable
   - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
   # Download Splunk Observability Cloud Jumpstart
@@ -201,7 +208,7 @@ runcmd:
   - sudo service shellinabox restart
   # Git Clone the QEP repo 
   - git clone https://github.com/IsmaelKP2/qep.git
-    # navigate to QEP folder 
+  # navigate to QEP folder 
   - cd qep
   # (1) Build the credit-check-service app
   - docker build -t credit-check-service:latest creditcheckservice
@@ -209,7 +216,7 @@ runcmd:
   - docker save --output credit-check-service.tar credit-check-service:latest
   # (3) Import it into k3s
   - sudo k3s ctr images import credit-check-service.tar
-  # (4) Deploy the service in kubernetes
+  # (4) Deploy the creditcheckservice in kubernetes
   - kubectl apply -f creditcheckservice/creditcheckservice.yaml
   # (5) Deploy the creditprocessorservice in kubernetes
   - kubectl apply -f creditprocessorservice/creditprocessorservice.yaml
