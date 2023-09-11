@@ -176,12 +176,16 @@ runcmd:
   # - rm -rf /home/ubuntu/observability-workshop-$WSVERSION
   # Git Clone the my version of the workshop
   - git clone https://github.com/IsmaelKP2/observability-workshop.git
-  - echo $(ls)
+  - echo "debug" > ~/logterr
+  - echo "" >> ~/logterr
+  - echo $(ls) > ~/logterr
   - mkdir /home/ubuntu/workshop
   - mv /observability-workshop/workshop/* /home/ubuntu/workshop
   - chown ubuntu:ubuntu /observability-workshop
-  - echo $(ls)
-  - rm -rf /observability-workshop
+  - echo "debug" > ~/logterr
+  - echo "" >> ~/logterr
+  - echo $(ls) >> ~/logterr
+  #- rm -rf /observability-workshop
   # Set apm-config.sh executable
   - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
   # Download Splunk Observability Cloud Jumpstart
