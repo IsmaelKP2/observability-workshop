@@ -176,7 +176,17 @@ runcmd:
   - rm -rf /home/ubuntu/observability-workshop-master
   - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
   - curl -s -L https://github.com/IsmaelKP2/hlw/releases/download/v.0.0.1/observability-workshop-master.zip -o master_2.zip
-  - curl -s -L https://github.com/IsmaelKP2/hlw/releases/download/v.0.0.1/observability-workshop-master.zip -o master_3.zip 
+  - unzip -qq master_2.zip -d /home/ubuntu/
+  - mkdir /home/ubuntu/workshop_2
+  - mv /home/ubuntu/observability-workshop-master/workshop/* /home/ubuntu/workshop_2
+  - rm -rf /home/ubuntu/observability-workshop-master
+  - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
+  - curl -s -L https://github.com/IsmaelKP2/hlw/releases/download/v.0.0.1/observability-workshop-master.zip -o master_3.zip
+  - unzip -qq master_3.zip -d /home/ubuntu/
+  - mkdir /home/ubuntu/workshop_3
+  - mv /home/ubuntu/observability-workshop-master/workshop/* /home/ubuntu/workshop_3
+  - rm -rf /home/ubuntu/observability-workshop-master
+  - chmod +x /home/ubuntu/workshop/apm/apm-config.sh 
   # Download Splunk Observability Cloud Jumpstart
   - curl -s -L https://github.com/signalfx/signalfx-jumpstart/archive/main.zip -o jumpstart.zip
   - unzip -qq jumpstart.zip -d /home/ubuntu/
