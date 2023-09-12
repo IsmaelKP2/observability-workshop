@@ -121,22 +121,10 @@ write_files:
       
       #add helm release
       helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart 
+      helm repo update        
+      helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart 
       helm repo update
-      # Get the helm release
-      helmlist=$(helm list)
-      re="(splunk-otel-collector[^[:space:]]+)"
-      if [[ $helmlist =~ $re ]]; then
-        HELMRELEASE=${BASH_REMATCH[1]};
-        # Upgrade otel collector
-        helm upgrade --set cloudProvider=" " --set distribution=" " \
-        --set splunkObservability.accessToken="$INGEST_TOKEN" \
-        --set clusterName="$ENVIRONMENT" --set splunkObservability.realm="$REALM" \
-        --set gateway.enabled="false" \
-        -f $MY_OTEL_VALUES_PATH \
-        $HELMRELEASE splunk-otel-collector-chart/splunk-otel-collector
-      else
-        echo "ERROR: Cannot find helm release to upgrade the otel collector.";
-      fi
+      helm install splunk-otel-collector --set="splunkObservability.realm=$REALM" --set="splunkObservability.accessToken=$INGEST_TOKEN" --set="clusterName=$ENVIRONMENT" --set="splunkObservability.logsEnabled=true" --set="splunkObservability.profilingEnabled=true" --set="environment=$INSTANCE-apm-env" splunk-otel-collector-chart/splunk-otel-collector -f $MY_OTEL_VALUES_PATH \
       
       # (2) Deploy the hipster shop app
       
