@@ -115,6 +115,7 @@ write_files:
         sudo rm "$MY_OTEL_VALUES_PATH"
         echo "Removed previous $MY_OTEL_VALUES_PATH"
       fi
+      sudo su
       sudo cp $OTEL_VALUES_PATH $MY_OTEL_VALUES_PATH
       # Update environment
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_OTEL_VALUES_PATH
@@ -136,7 +137,8 @@ write_files:
         echo "Removed previous $MY_HIPSTERSHOP_PATH"
       fi
       # Copy template
-      cp $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
+      sudo su 
+      sudo cp $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
       # Replace parameters
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_HIPSTERSHOP_PATH
       sed -i "s/{{realm}}/$REALM/" $MY_HIPSTERSHOP_PATH
