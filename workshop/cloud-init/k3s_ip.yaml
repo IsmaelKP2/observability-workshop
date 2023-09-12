@@ -95,7 +95,7 @@ write_files:
       
       # General variables
       #SCRIPT=$(readlink -f "$0")
-      SCRIPTPATH=/qep
+      SCRIPTPATH=/home/ubuntu/qep
       
       # Prompts
       #echo 'Enter environment (i.e. qep):'
@@ -115,8 +115,7 @@ write_files:
         sudo rm "$MY_OTEL_VALUES_PATH"
         echo "Removed previous $MY_OTEL_VALUES_PATH"
       fi
-      sudo su
-      sudo cp $OTEL_VALUES_PATH $MY_OTEL_VALUES_PATH
+      $OTEL_VALUES_PATH $MY_OTEL_VALUES_PATH
       # Update environment
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_OTEL_VALUES_PATH
       
@@ -137,8 +136,7 @@ write_files:
         echo "Removed previous $MY_HIPSTERSHOP_PATH"
       fi
       # Copy template
-      sudo su 
-      sudo cp $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
+      $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
       # Replace parameters
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_HIPSTERSHOP_PATH
       sed -i "s/{{realm}}/$REALM/" $MY_HIPSTERSHOP_PATH
@@ -270,7 +268,14 @@ runcmd:
   - sudo service shellinabox restart
 
   # Git Clone the QEP repo 
-  - git clone https://github.com/IsmaelKP2/qep.git
+  #- git clone https://github.com/IsmaelKP2/qep.git
+  - curl -s -L https://github.com/IsmaelKP2/qep/archive/refs/heads/main.zip  -o qep.zip
+  - unzip -qq qep.zip -d /home/ubuntu/
+  - mkdir /home/ubuntu/qep
+  - mv /home/ubuntu/qep-main/* /home/ubuntu/qep
+  - rm -rf /home/ubuntu/qep-main
+
+
   # navigate to QEP folder 
   - cd qep
   # (1) Build the credit-check-service app
