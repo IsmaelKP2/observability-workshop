@@ -112,13 +112,16 @@ write_files:
       MY_OTEL_VALUES_PATH="$SCRIPTPATH/otel/values-mine.yaml"
       # Remove if previous exists
       if [[ -e $MY_OTEL_VALUES_PATH ]]; then
-        rm "$MY_OTEL_VALUES_PATH"
+        sudo rm "$MY_OTEL_VALUES_PATH"
         echo "Removed previous $MY_OTEL_VALUES_PATH"
       fi
-      cp $OTEL_VALUES_PATH $MY_OTEL_VALUES_PATH
+      sudo cp $OTEL_VALUES_PATH $MY_OTEL_VALUES_PATH
       # Update environment
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_OTEL_VALUES_PATH
       
+      #add helm release
+      helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart 
+      helm repo update
       # Get the helm release
       helmlist=$(helm list)
       re="(splunk-otel-collector[^[:space:]]+)"
