@@ -135,7 +135,7 @@ write_files:
         echo "Removed previous $MY_HIPSTERSHOP_PATH"
       fi
       # Copy template
-      $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
+      cp $HIPSTERSHOP_PATH $MY_HIPSTERSHOP_PATH
       # Replace parameters
       sed -i "s/{{environment}}/$ENVIRONMENT/" $MY_HIPSTERSHOP_PATH
       sed -i "s/{{realm}}/$REALM/" $MY_HIPSTERSHOP_PATH
@@ -251,7 +251,7 @@ runcmd:
   - mkdir /home/ubuntu/qep
   - mv /home/ubuntu/qep-main/* /home/ubuntu/qep
   - rm -rf /home/ubuntu/qep-main
-  - chmod 666 /home/ubuntu/qep/app/hipster-shop.yaml
+  - chmod 777 /home/ubuntu/qep/app/hipster-shop.yaml
   # Configure motd
   - curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
   - chmod -x /etc/update-motd.d/*
