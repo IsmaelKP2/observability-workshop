@@ -31,7 +31,6 @@ write_files:
   - path: /etc/skel/.profile
     append: true
     content: |
-      sudo chmod +r /etc/rancher/k3s/k3s.yaml
       helm() {
         if [ -z ${ACCESS_TOKEN+x} ]; then >&2 echo "ACCESS_TOKEN is unset. Please export ACCESS_TOKEN=YOUR_TOKEN"; return; fi
         if [[ ${#ACCESS_TOKEN} < 22 ]]; then >&2 echo "ACCESS_TOKEN looks too short. It should be a string of at least 22 characters."; return; fi
@@ -246,6 +245,12 @@ runcmd:
   - curl -s -L https://github.com/signalfx/signalfx-jumpstart/archive/main.zip -o jumpstart.zip
   - unzip -qq jumpstart.zip -d /home/ubuntu/
   - mv /home/ubuntu/signalfx-jumpstart-main /home/ubuntu/signalfx-jumpstart
+  # Git Clone the QEP repo 
+  - curl -s -L https://github.com/IsmaelKP2/qep/archive/refs/heads/main.zip  -o qep.zip
+  - unzip -qq qep.zip -d /home/ubuntu/
+  - mkdir /home/ubuntu/qep
+  - mv /home/ubuntu/qep-main/* /home/ubuntu/qep
+  - rm -rf /home/ubuntu/qep-main
   # Configure motd
   - curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
   - chmod -x /etc/update-motd.d/*
@@ -266,15 +271,6 @@ runcmd:
   - sed -i 's/SHELLINABOX_PORT=4200/SHELLINABOX_PORT=6501/'  /etc/default/shellinabox
   - sed -i "s/\"--no-beep\"/\"--no-beep --disable-ssl\"/" /etc/default/shellinabox
   - sudo service shellinabox restart
-
-  # Git Clone the QEP repo 
-  #- git clone https://github.com/IsmaelKP2/qep.git
-  - curl -s -L https://github.com/IsmaelKP2/qep/archive/refs/heads/main.zip  -o qep.zip
-  - unzip -qq qep.zip -d /home/ubuntu/
-  - mkdir /home/ubuntu/qep
-  - mv /home/ubuntu/qep-main/* /home/ubuntu/qep
-  - rm -rf /home/ubuntu/qep-main
-
 
   # navigate to QEP folder 
   - cd qep
