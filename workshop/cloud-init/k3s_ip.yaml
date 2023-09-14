@@ -152,8 +152,8 @@ write_files:
       echo ""
       echo Check in O11y Cloud if you can find the application
       echo in the right org and in the right environment.
-      
-
+      curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/tort -o /home/ubuntu/tort.txt
+      cat tort.txt
       # Set prompt
       export PS1='\u@\h:\w$ '
       export KUBECONFIG=/home/ubuntu/.kube/config
@@ -210,22 +210,6 @@ write_files:
       fi
       export INSTANCE
 
-      # Checkout all lab branches
-      git clone https://github.com/signalfx/observability-bootcamp /home/ubuntu/bootcamp
-      export GIT_DIR=/home/ubuntu/bootcamp/.git
-      export GIT_WORK_DIR=/home/ubuntu/bootcamp
-      git branch -a --format '%(refname:lstrip=-1)' | grep -Evi 'main|head|gh-pages' | xargs -n1 git checkout
-      # Switch to main
-      git checkout main
-      # setup milestones for diff
-      for branch in $(git branch --all | grep '^\s*remotes' | grep -v -E '(:?HEAD|master|main|gh-pages)$'); do
-          br="${branch##*/}"
-          mkdir -p /home/ubuntu/milestones/"$br"
-          git archive --format tar "$br"| tar xf - -C /home/ubuntu/milestones/"$br"/
-      done
-      unset GIT_DIR
-      unset GIT_WORK_DIR
-
 runcmd:
   # Install Helm
   - curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
@@ -241,10 +225,6 @@ runcmd:
   - mv /home/ubuntu/observability-workshop-master/workshop/* /home/ubuntu/workshop
   - rm -rf /home/ubuntu/observability-workshop-master
   - chmod +x /home/ubuntu/workshop/apm/apm-config.sh
-  # Download Splunk Observability Cloud Jumpstart
-  - curl -s -L https://github.com/signalfx/signalfx-jumpstart/archive/main.zip -o jumpstart.zip
-  - unzip -qq jumpstart.zip -d /home/ubuntu/
-  - mv /home/ubuntu/signalfx-jumpstart-main /home/ubuntu/signalfx-jumpstart
   # Git Clone the QEP repo 
   - curl -s -L https://github.com/IsmaelKP2/qep/archive/refs/heads/main.zip  -o qep.zip
   - unzip -qq qep.zip -d /home/ubuntu/
@@ -253,7 +233,8 @@ runcmd:
   - rm -rf /home/ubuntu/qep-main
   - chmod 777 /home/ubuntu/qep/app/hipster-shop.yaml
   # Configure motd
-  - curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
+  #- curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
+  - curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/trackortrace -o /etc/motd
   - chmod -x /etc/update-motd.d/*
   # Install Terraform
   - curl -S -OL https://releases.hashicorp.com/terraform/1.2.8/terraform_1.2.8_linux_amd64.zip 
