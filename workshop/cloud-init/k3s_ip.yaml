@@ -141,6 +141,7 @@ write_files:
       sed -i "s/{{realm}}/$REALM/" $MY_HIPSTERSHOP_PATH
       sed -i "s/{{rum_token}}/$RUM_TOKEN/" $MY_HIPSTERSHOP_PATH
       sed -i "s/{{rum_app_name}}/$ENVIRONMENT-app/" $MY_HIPSTERSHOP_PATH
+      sed -i "s/{{addhost}}/$HOSTNAME/" $MY_HIPSTERSHOP_PATH
       # Re-deploy app
       kubectl apply -f $MY_HIPSTERSHOP_PATH
       

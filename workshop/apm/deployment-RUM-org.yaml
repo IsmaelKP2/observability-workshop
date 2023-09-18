@@ -927,7 +927,7 @@ spec:
         - name: OTEL_SERVICE_NAME
           value: "creditcheckservice"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.environment=${INSTANCE}-apm-env,version=2.0"
+          value: "deployment.environment={{addhost}}-apm-env,version=2.0"
         - name: OTEL_PROPAGATORS
           value: "b3multi"
         resources:
@@ -990,7 +990,7 @@ spec:
         - name: OTEL_SERVICE_NAME
           value: "creditcheckservice"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.environment=${INSTANCE}-apm-env,version=2.0"
+          value: "deployment.environment={{addhost}}-apm-env,version=2.0"
         resources:
           requests:
             cpu: 110m
