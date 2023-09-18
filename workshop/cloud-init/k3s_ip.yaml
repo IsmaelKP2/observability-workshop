@@ -152,7 +152,8 @@ write_files:
       echo ""
       echo Check in O11y Cloud if you can find the application
       echo in the right org and in the right environment.
-      curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/tort -o /home/ubuntu/tort.txt
+      curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/TorT -o /home/ubuntu/tort.txt
+
       cat tort.txt
       # Set prompt
       export PS1='\u@\h:\w$ '
@@ -233,8 +234,8 @@ runcmd:
   - rm -rf /home/ubuntu/qep-main
   - chmod 777 /home/ubuntu/qep/app/hipster-shop.yaml
   # Configure motd
-  #- curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
-  - curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/trackortrace -o /etc/motd
+  - curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
+  #- curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/trackortrace -o /etc/motd
   - chmod -x /etc/update-motd.d/*
   # Install Terraform
   - curl -S -OL https://releases.hashicorp.com/terraform/1.2.8/terraform_1.2.8_linux_amd64.zip 
