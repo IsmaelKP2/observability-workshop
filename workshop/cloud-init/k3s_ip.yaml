@@ -106,6 +106,16 @@ write_files:
       #echo 'Enter rum token:'
       RUM_TOKEN=xCib-dMgx4BQZC0KiZ0haA
       
+      # navigate to QEP folder 
+      cd qep
+      # (1) Build the credit-check-service app
+      docker build -t credit-check-service:latest creditcheckservice
+      # (2) Export the image from docker
+      docker save --output credit-check-service.tar credit-check-service:latest
+      # (3) Import it into k3s
+      sudo k3s ctr images import credit-check-service.tar
+      cd ~
+
       # (1) Upgrade the otel collector (for your org)
       OTEL_VALUES_PATH="$SCRIPTPATH/otel/values.yaml"
       MY_OTEL_VALUES_PATH="$SCRIPTPATH/otel/values-mine.yaml"
@@ -221,7 +231,7 @@ runcmd:
   # # Download Workshop
   # - export WSVERSION=4.36
   #- 'export WSARCHIVE=$([ "$WSVERSION" = "main" ] && echo "main" || echo "v$WSVERSION")'
-  - curl -s -L https://github.com/IsmaelKP2/observability-workshop/releases/download/v5.0.3/observability-workshop-master.zip  -o master.zip
+  - curl -s -L https://github.com/IsmaelKP2/observability-workshop/releases/download/v.5.0.3/observability-workshop-master.zip  -o master.zip
   - unzip -qq master.zip -d /home/ubuntu/
   - mkdir /home/ubuntu/workshop
   - mv /home/ubuntu/observability-workshop-master/workshop/* /home/ubuntu/workshop
@@ -255,12 +265,3 @@ runcmd:
   - sed -i 's/SHELLINABOX_PORT=4200/SHELLINABOX_PORT=6501/'  /etc/default/shellinabox
   - sed -i "s/\"--no-beep\"/\"--no-beep --disable-ssl\"/" /etc/default/shellinabox
   - sudo service shellinabox restart
-
-  # navigate to QEP folder 
-  - cd qep
-  # (1) Build the credit-check-service app
-  - docker build -t credit-check-service:latest creditcheckservice
-  # (2) Export the image from docker
-  - docker save --output credit-check-service.tar credit-check-service:latest
-  # (3) Import it into k3s
-  - sudo k3s ctr images import credit-check-service.tar
