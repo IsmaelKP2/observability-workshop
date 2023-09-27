@@ -167,7 +167,8 @@ write_files:
 
       cat tort.txt
       # Set prompt
-      export PS1='\u@\h:\w$ '
+      #export PS1='\u@\h:\w$ '
+      export PS1="$fg_bold[cyan]%}$USER@%{$fg_bold[blue]%}%m ${PROMPT}"
       export KUBECONFIG=/home/ubuntu/.kube/config
       alias kc='kubectl'
       alias dc='docker-compose'
@@ -223,6 +224,9 @@ write_files:
       export INSTANCE
 
 runcmd:
+  - chsh -s $(which zsh) ubuntu
+  - su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
+  - echo "source /etc/skel/.profile" >> /home/ubuntu/.zshrc
   # Install Helm
   - curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   # Install K9s (Kubernetes UI)
