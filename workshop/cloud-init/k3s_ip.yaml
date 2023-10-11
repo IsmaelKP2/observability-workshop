@@ -224,9 +224,6 @@ write_files:
       export INSTANCE
 
 runcmd:
-  - chsh -s $(which zsh) ubuntu
-  - su ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"'
-  - echo "source /etc/skel/.profile" >> /home/ubuntu/.zshrc
   # Install Helm
   - curl -s https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
   # Install K9s (Kubernetes UI)
@@ -250,7 +247,6 @@ runcmd:
   - chmod 777 /home/ubuntu/qep/app/hipster-shop.yaml
   # Configure motd
   - curl -s https://raw.githubusercontent.com/signalfx/observability-workshop/main/workshop/cloud-init/motd -o /etc/motd
-  #- curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/trackortrace -o /etc/motd
   - chmod -x /etc/update-motd.d/*
   # Install Terraform
   - curl -S -OL https://releases.hashicorp.com/terraform/1.2.8/terraform_1.2.8_linux_amd64.zip 
