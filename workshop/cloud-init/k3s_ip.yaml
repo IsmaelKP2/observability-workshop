@@ -105,16 +105,6 @@ write_files:
       INGEST_TOKEN=U3EJ9YqiOOH7VKApYY9Rwg
       #echo 'Enter rum token:'
       RUM_TOKEN=xCib-dMgx4BQZC0KiZ0haA
-      
-      # navigate to QEP folder 
-      cd qep
-      # (1) Build the credit-check-service app
-      docker build -t credit-check-service:latest creditcheckservice
-      # (2) Export the image from docker
-      docker save --output credit-check-service.tar credit-check-service:latest
-      # (3) Import it into k3s
-      sudo k3s ctr images import credit-check-service.tar
-      cd ~
 
       # (1) Upgrade the otel collector (for your org)
       OTEL_VALUES_PATH="$SCRIPTPATH/otel/values.yaml"
