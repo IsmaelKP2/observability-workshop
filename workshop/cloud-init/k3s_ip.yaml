@@ -166,6 +166,7 @@ write_files:
       curl -s https://raw.githubusercontent.com/IsmaelKP2/hlw/main/TorT -o /home/ubuntu/tort.txt
 
       cat tort.txt
+      cd /home/ubuntu/qep
       # Set prompt
       export PS1='\u@\h:\w$ '
       #export PS1="$fg_bold[cyan]%}$USER@%{$fg_bold[blue]%}%m ${PROMPT}"
