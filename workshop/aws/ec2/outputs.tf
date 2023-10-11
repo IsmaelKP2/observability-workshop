@@ -3,7 +3,7 @@ output "ip_addresses" {
 }
 
 output "instance_names" {
-  value = aws_instance.observability-instance[*].tags["Instance"]
+  value = aws_instance.observability-instance[*].tags["Name"]
 }
 
 #output "public_subnet_ids" {
@@ -16,9 +16,9 @@ output "instance_password" {
 
 output "login_details" {
   value = formatlist(
-    "%s, %s, %s",
-    aws_instance.observability-instance[*].tags["Instance"],
+    "%s, %s", //, %s
+    aws_instance.observability-instance[*].tags["Name"],
     aws_instance.observability-instance.*.public_ip,
-    local.template_vars.instance_password
+    //local.template_vars.instance_password
   )
 }

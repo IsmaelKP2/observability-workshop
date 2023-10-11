@@ -8,6 +8,10 @@ locals {
     Component = "o11y-for-${var.slug}"
     Environment = "production"
   }
+  template_vars = {
+    instance_password = random_string.password
+  }
+
 }
 
 resource "aws_vpc" "o11y-ws-vpc" {
@@ -163,4 +167,8 @@ resource "aws_instance" "observability-instance" {
 
 output "ip" {
   value = aws_instance.observability-instance.*.public_ip
+}
+
+resource "random_string" "password" {
+  length = 8
 }
