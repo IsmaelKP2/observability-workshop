@@ -1,6 +1,6 @@
 #cloud-config
 ssh_pwauth: yes
-password: Observability2022!
+password: TrickyTrace$
 chpasswd:
   expire: false
 
