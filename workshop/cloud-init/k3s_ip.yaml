@@ -1,6 +1,6 @@
 #cloud-config
 ssh_pwauth: yes
-password: TrickyTrace$
+password: TrickyTrace$1
 chpasswd:
   expire: false
 
