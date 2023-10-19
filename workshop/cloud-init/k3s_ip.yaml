@@ -71,8 +71,8 @@ write_files:
       # REPLACE the [REALM] with REALM and the [YOUR_ACCESS_TOKEN] with a proper access token to use 
         
       export PRESETUP="no"   
-      export REALM=us1
-      export ACCESS_TOKEN=U3EJ9YqiOOH7VKApYY9Rwg
+      export REALM=eu0
+      export ACCESS_TOKEN=0hsjxt-BGbmHdVB5D20yjA
       export KUBECONFIG=/home/ubuntu/.kube/config
 
       if [ "$PRESETUP" == "Yes" ]; then
@@ -100,11 +100,11 @@ write_files:
       #echo 'Enter environment (i.e. qep):'
       ENVIRONMENT=$(hostname)-apm-env
       #echo 'Enter realm (i.e. us1):'
-      REALM=us1
+      REALM=eu0
       #echo 'Enter ingest token:'
-      INGEST_TOKEN=U3EJ9YqiOOH7VKApYY9Rwg
+      INGEST_TOKEN=6O_qi6YoEPg75OxjVKStuA
       #echo 'Enter rum token:'
-      RUM_TOKEN=xCib-dMgx4BQZC0KiZ0haA
+      RUM_TOKEN=0hsjxt-BGbmHdVB5D20yjA
 
       # (1) Upgrade the otel collector (for your org)
       OTEL_VALUES_PATH="$SCRIPTPATH/otel/values.yaml"
